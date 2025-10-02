@@ -5,7 +5,7 @@ print("CSV Handling")
 print("-" *50)
 
 #1. Create CSV file with student data
-print("\n1.Ceating CSV file....")
+print("\n1.Creating CSV file....")
 students = [
     ["Id","Name","Course","Marks"],
     ["ST001","Amit","Python",85],
