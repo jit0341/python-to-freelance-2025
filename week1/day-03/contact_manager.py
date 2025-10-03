@@ -1,5 +1,16 @@
 # Contact Manager-Day 3 Project
 contacts = {}
+# Load contacts from file if it exists
+try:
+    with open("contacts.txt","r") as file:
+        for line in file:
+            parts = line.strip().split("|")
+            if len(parts)==3:
+                name,phone,email = parts
+                contacts[name] = {"phone":phone,"email":email}
+    print(f"Loaded{len(contacts)}contacts from file")
+except FileNotFoundError:
+    print("No saved contacts found. Starting fresh")
 
 print("===Contact Manager===")
 print("Contacts:", contacts)
