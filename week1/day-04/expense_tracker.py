@@ -43,9 +43,9 @@ while True:
     elif choice == "4":
         with open("expenses.txt","w") as file:
             for expense in expenses:
-                line = f"{expense['amount']}|{expense['category']}|{expense['description']}"
+                line = f"{expense['amount']}|{expense['category']}|{expense['description']}\n"
                 file.write(line)
-                print("Expense saved in a file")
+        print("Expense saved in a file")
         print("Goodbye!")
         break
     else:
