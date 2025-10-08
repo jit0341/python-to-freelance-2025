@@ -1,6 +1,46 @@
+import os
+
+def load_expenses():
+    """Load expenses from file if it exists"""
+    expenses = []
+    
+    if os.path.exists("expenses1.txt"):
+        try:
+            with open("expenses1.txt", "r") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        parts = line.split("|")
+                        if len(parts) == 3:
+                            expense = {
+                                "amount": float(parts[0]),
+                                "category": parts[1],
+                                "description": parts[2]
+                            }
+                            expenses.append(expense)
+            print(f"✓ Loaded {len(expenses)} previous expenses")
+        except Exception as e:
+            print(f"Error loading file: {e}")
+            print("Starting with empty expenses")
+    else:
+        print("No previous data found. Starting fresh!")
+    
+    return expenses
+
+
 def add_expense(expenses):
     """Add a new expense to the list"""
-    amount = float(input("Enter amount:"))
+    """Add new expense with error handling"""
+    # Handle amount input errors.
+    try:
+        amount = float(input("Enter amount:"))
+        if amount <= 0:
+            print("Amount must be positive!")
+            return
+    except ValueError:
+        print("Invalid amount!. Please enter a number")
+        return
+
     category = input("Enter category:")
     description = input("Enter description:")
     expense = {"amount":amount, "category":category, "description":description}
@@ -42,7 +82,7 @@ def save_and_exit(expenses):
         print("Expense saved in a file")
         print("Goodbye!")
 
-expenses = []
+expenses = load_expenses()
 
 while True:
     print("\n===Menu===")
