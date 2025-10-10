@@ -9,13 +9,17 @@ expenses = [
           ]
 
 # Challenge 1: Use list comprehension to get all Food items
-food_items = # YOUR CODE HERE
+food_items = [exp for exp in expenses if exp['category'] == "Food"]
+print("Food items",food_items)
 
 # Challenge 2: Use lambda + sorted to sort by amount (highest first)
-sorted_by_amount = # YOUR CODE HERE
+sorted_by_amount = sorted(expenses,key=lambda x:x['amount'], reverse = True)
+print("Sorted:", sorted_by_amount)
 
 # Challenge 3: Use map to get just the amounts
-just_amounts = # YOUR CODE HERE
+just_amounts = list(map(lambda x:x['amount'],expenses))
+print("\nAmount", just_amounts)
 
 # Challenge 4: Use filter to get expenses over ₹500
-big_expenses = # YOUR CODE HERE
+big_expenses = list(filter(lambda x:x ['amount']> 500,expenses))
+print("Big expenses",big_expenses)
