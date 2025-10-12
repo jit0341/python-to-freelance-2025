@@ -102,12 +102,21 @@ def top_performers(student):
     sorted_students = sorted(students,key = lambda x:x ['average'], reverse = True)
 
     print("\n" + "="*60)
+<<<<<<< HEAD
      for i, student in enumerate(sorted_students[:3], 1):
         print(f"{i}. {student['name']} - Average: {student['average']:.2f} (Grade: {student['grade']})")
+=======
+    print("TOP PERFORMER")
+    print("="*60)
+
+    for i, student in enumerate(sorted_students[:3],1):
+        print(f"{i}: {student['name']}-Average: {student['average']:2f}(Grade: {student['grade']})")
+>>>>>>> 5bcd2f8 (Student grade manager updated.)
 
 def view_by_grade(students):
     """Filter students by grade"""
     grade = input("Enter grade to filter (A/B/C/D/F): ").upper()
+<<<<<<< HEAD
     
     # Use list comprehension to filter
     filtered = [s for s in students if s['grade'] == grade]
@@ -202,6 +211,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+=======
+>>>>>>> 5bcd2f8 (Student grade manager updated.)
 
 
 
