@@ -102,6 +102,108 @@ def top_performers(student):
     sorted_students = sorted(students,key = lambda x:x ['average'], reverse = True)
 
     print("\n" + "="*60)
+     for i, student in enumerate(sorted_students[:3], 1):
+        print(f"{i}. {student['name']} - Average: {student['average']:.2f} (Grade: {student['grade']})")
+
+def view_by_grade(students):
+    """Filter students by grade"""
+    grade = input("Enter grade to filter (A/B/C/D/F): ").upper()
+    
+    # Use list comprehension to filter
+    filtered = [s for s in students if s['grade'] == grade]
+    
+    if filtered:
+        print(f"\nStudents with grade {grade}:")
+        for student in filtered:
+            print(f"- {student['name']}: Average {student['average']:.2f}")
+    else:
+        print(f"No students found with grade {grade}")
+
+def save_students(students):
+    """Save students to file"""
+    try:
+        with open("students.txt", "w") as file:
+            for student in students:
+                marks_str = "|".join([f"{subject}:{mark}" for subject, mark in student['marks'].items()])
+                line = f"{student['name']}|{marks_str}|{student['average']:.2f}|{student['grade']}\n"
+                file.write(line)
+        print("Students saved to file")
+    except Exception as e:
+        print(f"Error saving: {e}")
+
+def load_students():
+    """Load students from file"""
+    students = []
+    
+    if os.path.exists("students.txt"):
+        try:
+            with open("students.txt", "r") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        parts = line.split("|")
+                        if len(parts) >= 4:
+                            name = parts[0]
+                            # Parse marks
+                            marks = {}
+                            for i in range(1, len(parts) - 2):
+                                subject, mark = parts[i].split(":")
+                                marks[subject] = float(mark)
+                            
+                            average = float(parts[-2])
+                            grade = parts[-1]
+                            
+                            student = {
+                                "name": name,
+                                "marks": marks,
+                                "average": average,
+                                "grade": grade
+                            }
+                            students.append(student)
+            
+            if students:
+                print(f"Loaded {len(students)} students")
+        except Exception as e:
+            print(f"Error loading: {e}")
+    
+    return students
+
+def main():
+    """Main program loop"""
+    students = load_students()
+    
+    while True:
+        print("\n===MENU===")
+        print("1. Add student")
+        print("2. View all")
+        print("3. Search student")
+        print("4. Top performers")
+        print("5. View by grade")
+        print("6. Exit")
+        
+        choice = input("Enter choice: ")
+        
+        if choice == "1":
+            add_student(students)
+        elif choice == "2":
+            view_all_students(students)
+        elif choice == "3":
+            search_student(students)
+        elif choice == "4":
+            top_performers(students)
+        elif choice == "5":
+            view_by_grade(students)
+        elif choice == "6":
+            save_students(students)
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice!")
+
+if __name__ == "__main__":
+    main()
+
+
 
 
 
