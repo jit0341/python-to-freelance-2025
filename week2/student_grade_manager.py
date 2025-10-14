@@ -72,7 +72,7 @@ def view_all_students(students):
 
 
     for student in students:
-        print(f"\nName: {student['mame']}")
+        print(f"\nName: {student['name']}")
         print(f"Marks: {student['marks']}")
         print(f"Average: {student['average']:2f}")
         print(f"Grade: {student['grade']}")
@@ -91,9 +91,9 @@ def search_student(students):
         print(f"Grade: {student['grade']}")
 
     else:
-        print(f"Student{name} not found")
+        print(f"Student {name} not found")
 
-def top_performers(student):
+def top_performers(students):
     """Show top 3 performers using lambda +sorted"""
     if not students:
         print("No students to display!")
@@ -103,13 +103,16 @@ def top_performers(student):
 
     print("\n" + "="*60)
 
-     for i, student in enumerate(sorted_students[:3], 1):
+    for i, student in enumerate(sorted_students[:3], 1):
+
+
         print(f"{i}. {student['name']} - Average: {student['average']:.2f} (Grade: {student['grade']})")
 
-    print("TOP PERFORMER")
-    print("="*60)
+        print("TOP PERFORMER")
+        print("="*60)
 
     for i, student in enumerate(sorted_students[:3],1):
+
         print(f"{i}: {student['name']}-Average: {student['average']:2f}(Grade: {student['grade']})")
 
 def view_by_grade(students):
