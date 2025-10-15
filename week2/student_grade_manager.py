@@ -82,7 +82,7 @@ def search_student(students):
     name = input("Enter student name to search:")
 
     #Use list comprehension to find student
-    found = [s for s in students if s['name'].lower == name.lower()]
+    found = [s for s in students if s['name'].lower().strip() == name.lower()]
     if found:
         student = found[0]
         print(f"\nName: {student['name']}")
