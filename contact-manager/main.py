@@ -39,7 +39,7 @@ def load_contacts():
 
 
 def save_contacts():
-    """It makes changes permanent by writing to contacts.txt."""
+    """It makes changes permanent by writing to contacts.txtls."""
     try:
         with open(CONTACTS_FILE, 'w') as file:
             for name, details in contacts.items():
