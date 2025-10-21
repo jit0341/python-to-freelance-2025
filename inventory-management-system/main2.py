@@ -68,5 +68,16 @@ def add_inventories():
     print(f"Inventories '{product_name}' added successfully.")
     
 def view_all_inventories():
+    print("\n-----All inventories----")
+    
+    if not inventories:
+        print("No inventories found. Add one.")
+        return
+    print(f"{'product_name': <20} {'price': <15} {'quantity': <30}")
+    print("=" *65)
     
     
+    for product_name, details in inventories.items():
+        print(f"{product_name: <20} {details['price']: <15} {details['quantity']: <30}")
+        
+def search_inventory():
