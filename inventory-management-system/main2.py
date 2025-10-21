@@ -35,7 +35,7 @@ def load_inventories():
         
 def save_inventories():
     try:
-        with open("inventories_file","w") as file:
+        with open("inventories.txt","w") as file:
             for product_name,details in inventories.items():
                 line = f"{product_name}{SEPARATOR}{details['price']}{SEPARATOR}{details['quantity']}\n"
                 file.write(line)
@@ -59,7 +59,7 @@ def add_inventories():
         print(f"Inventory '{product_name}' already exists.")
         return
     price = input("Enter product price:").strip() or "N/A"
-    quantity = input("Enter quantity").strip() or "N/A"
+    quantity = input("Enter quantity:").strip() or "N/A"
     
     inventories[product_name] = {
         "price": price,
@@ -81,3 +81,67 @@ def view_all_inventories():
         print(f"{product_name: <20} {details['price']: <15} {details['quantity']: <30}")
         
 def search_inventory():
+    print("-----Search inventory------")
+    search_term = input("Enter product name to search:").strip().title()
+    if search_term in inventories:
+        details = inventories[search_term]
+        print(f"\nFound inventories: {search_term}")
+        print(f" Price: {details['price']}")
+        print(f" Quantity: {details['quantity']}")
+        
+    else:
+        print(f"Inventory: '{search_term}' not found.")
+        
+def delete_inventory():
+    global inventories
+    print("\n----Deleting the inventory----")
+    product_name_to_delete = input("Enter product name to delete:").strip().title()
+    if product_name_to_delete in inventories:
+        confirm = input(f"Are you sure want to delete '{product_name_to_delete}'? (y/n):").lower()
+        if confirm == 'y':
+            del inventories[product_name_to_delete]
+            print(f"Inventories '{product_name_to_delete}' deleted successfully.")
+        else:
+            print("Action cancelled.")
+    else:
+        print(f"Inventories '{product_name_to_delete}'  not found.")
+        
+# =============================================================
+#                MAIN MENU
+#==============================================================
+def main_menu():
+    load_inventories()
+    
+    while True:
+        print("\n" + "="*30)
+        print("  INVENTORY MANAGEMENT MENU")
+        print("="*30)
+        print("1. Add Inventory")
+        print("2. View All Inventories")
+        print("3. Search Inventory by Product Name")
+        print("4. Delete Inventory")
+        print("5. Exit and Save")
+        print("-" * 30)
+
+        choice = input("Enter your choice (1-5): ").strip()
+        
+        if choice == "1":
+            add_inventories()
+        elif choice == "2":
+            view_all_inventories()
+        elif choice == "3":
+            search_inventory()
+        elif choice == "4":
+            delete_inventory()
+        elif choice == "5":
+            save_inventories()
+        
+            print("\n👋 Thank you for using the Inventory Management System. Goodbye!")
+            break
+        else:
+            print("❌ Invalid choice. Please enter a number between 1 and 5.")
+            
+# -----Run the program----
+if __name__ == "__main__":
+    main_menu()       
+    
