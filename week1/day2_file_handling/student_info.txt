@@ -1,0 +1,5 @@
+Name: Jitendra
+    Age : 25
+    Skills : SQL Python
+    Goal : Freelance Developer 
+ Status: Learning
