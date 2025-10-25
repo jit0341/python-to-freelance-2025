@@ -1,1 +1,4 @@
 Books|400|40
+Television|25000|1
+Laptop|55000|5
+Mobile Phone|34000|50
