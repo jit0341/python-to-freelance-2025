@@ -27,9 +27,9 @@ def load_inventories():
                     
         print("Inventories loaded successfully from inventories.txt.")
     except FileNotFoundError:
-        print("No invetories file found! Starting fresh.")
+        print("No inventories file found! Starting fresh.")
     except Exception as e:
-        print(f"An error occured during loading: {e}")
+        print(f"An error occurred during loading: {e}")
         
         inventories = {}
         
@@ -73,7 +73,7 @@ def view_all_inventories():
     if not inventories:
         print("No inventories found. Add one.")
         return
-    print(f"{'product_name': <20} {'price': <15} {'quantity': <30}")
+    print(f"{'Product Name': <20} {'price': <15} {'quantity': <30}")
     print("=" *65)
     
     
@@ -81,7 +81,7 @@ def view_all_inventories():
         print(f"{product_name: <20} {details['price']: <15} {details['quantity']: <30}")
         
 def search_inventory():
-    print("-----Search inventory------")
+    print("\n-----Search inventory------")
     search_term = input("Enter product name to search:").strip().title()
     if search_term in inventories:
         details = inventories[search_term]
