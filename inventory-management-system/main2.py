@@ -9,7 +9,7 @@ def load_inventories():
     
     inventories = {}
     try:
-        with open("inventories_file","r") as file:
+        with open(inventories_file,"r") as file:
             for line in file:
                 line = line.strip()
                 if not line:
