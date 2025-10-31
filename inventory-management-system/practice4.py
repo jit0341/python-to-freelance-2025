@@ -1,5 +1,5 @@
 #======Configuration===========
-inventories_file = "inventories.txt"
+inventories_file = "inventories1.txt"
 inventories = {}
 SEPARATOR = "|"
 
@@ -21,7 +21,7 @@ def load_inventories():
                     "quantity": quantity
                     }
 
-        print("Inventories loaded successfully from inventories.txt")
+        print("Inventories loaded successfully from inventories1.txt")
         
     except FileNotFoundError:
         print("No inventories file found! starting fresh.")
@@ -30,11 +30,11 @@ def load_inventories():
         inventories = {}
 def save_inventories():
     try:
-        with open("inventories.txt","w") as file:
+        with open("inventories1.txt","w") as file:
             for product_name,details in inventories.items():
                 line = f"{product_name}{SEPARATOR}{details['price']}{SEPARATOR}{details['quantity']}\n"
                 file.write(line)
-        print(f"\nInventories '{product_name}' saved successfully to inventories.txt")
+        print("\nInventories  saved successfully to inventories1.txt")
 
     except Exception as e:
         print(f"Error saving inventories : {e}")
@@ -46,7 +46,7 @@ def add_inventory():
     print("=" *65)
 
     product_name = input("Enter product:").strip().title()
-    if not inventories:
+    if not product_name:
         print("Product name cannot be empty")
         return
     if product_name in inventories:
@@ -79,9 +79,9 @@ def search_inventory():
     search_term = input("Enter product name to search:").strip().title()
     if search_term in inventories:
         details = inventories[search_term]
-        print(f"\nFound inventory: {search_term}")
-        print(f" {details['price']} ")
-        print(f" {details['quantity']} ")
+        print(f"\nFound inventories: {search_term}")
+        print(f" Price:{details['price']} ")
+        print(f" Quantity:{details['quantity']} ")
 
     else:
         print(f" Inventory'{search_term}' not found")
@@ -89,14 +89,17 @@ def search_inventory():
 def delete_inventory():
     global inventories
     print("\n------Deleting Inventory------")
-    product_name_to_delete = input("Enter product name to delete:")
+    product_name_to_delete = input("Enter product name to delete:").strip().title()
     if product_name_to_delete in inventories:
         confirm = input(f" Are you sure want to delete '{product_name_to_delete}'? (y/n):").lower()
         if confirm == 'y':
             del inventories[product_name_to_delete]
-            print(f"Inventory'{product_name_to_delete}' deleted successfully")
+            print(f"Inventories '{product_name_to_delete}' deleted successfully.")
         else:
-            print(f" Inventories'{product_name_to_delete}' not found!")
+            print("Deletion cancelled.")
+    else:
+        print(f"Inventories '{product_name_to_delete}' not found.")
+
 
 #====================================
 #        Main Menu
