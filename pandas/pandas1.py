@@ -36,6 +36,38 @@ student_data = {
     }
 df_students = pd.DataFrame(student_data)
 print(df_students)
+print("=" *20)
+
+import pandas as pd
+
+client_data = {
+    'Name': ['Sudheer', 'Ravindra', 'Ramchandra'],
+    'FIR_No': [64,9,4],
+    'Date': ['30/01/25', '04/01/25', '02/01/25'],
+    'Status': ['Confirmed', 'Confirmed', 'Pending']
+    }
+
+df = pd.DataFrame(client_data)
+print(df)
+print("=" *35)
+
+import pandas as pd
+
+
+client_data2 = {
+    'Name': ['Govinda Sahu', 'Bala', 'Nukesh Rajwade', 'Rami Yadav', 'Kariman Rajwade', 'Ravi Kumar'],
+    'FIR_No': [581,583,585,586,587,591],
+    'Mobile_No': [9131472937,9669033832,8839827015,9617168714,6265808207,7697952514],
+    'Area': ['Surajpur', 'Surajpur', 'Surajpur', 'Surajpur', 'Surajpur', 'Surajpur'],
+    'Village': ['Pampapur Jharpara', 'Manpur Turiyapara', 'Unchdih Jagarnathpara', 'Gram Chopan Beejpara', 'Bharuamuda Khalpara', 'Kusmusi Harijanpara'],
+    'Status': ['Confirmed', 'Pending', 'Comfirmed', 'Contacted', 'Confirmed', 'Confirmed']
+    }
+df = pd.DataFrame(client_data2)
+pd.set_option('display.width', 1000)
+pd.set_option('display.max_colwidth', 15)
+
+print(df.to_string())
+
 
 
 
