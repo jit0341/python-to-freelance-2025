@@ -48,4 +48,38 @@ print("\n \u2705 DataFrame info.")
 print(df_clients.info())
 
 print(f"\n✅ Total Records: {df_clients.shape[0]} rows, {df_clients.shape[1]} columns")
+# ============================================
+# SECTION 2: COLUMN SELECTION
+# ============================================
+print("\n\n n📋 SECTION 2: SPECIFIC DATA EXTRACTION")
+print("="*60)
+print("\n✅ Client Names Only:")
+
+print(df_clients['Name'].head())
+print("\n ✅Multiple Columns(Name,Case Type, Status):")
+print(df_clients[['Name','Case_Type','Status']].head())
+
+#  ============================================
+# SECTION 3: STATISTICAL ANALYSIS (sum, mean, max, min)
+# ============================================
+print("\n\n💰 SECTION 3: FINANCIAL STATISTICS")
+print("="*60)
+
+print(f"\n✅ Total Fee Amount: ₹{df_clients['Fee_Amount'].sum():,}")
+print(f"✅ Average Fee: ₹{df_clients['Fee_Amount'].mean():.2f}")
+print(f"✅ Highest Fee: ₹{df_clients['Fee_Amount'].max():,}")
+print(f"✅ Lowest Fee: ₹{df_clients['Fee_Amount'].min():,}")
+print(f"✅ Total Clients: ₹{df_clients['Name'].count()}")
+# ============================================
+# SECTION 4: BOOLEAN INDEXING (Filtering)
+# ============================================
+print("\n\n 🔍SECTION 4: Filtered Insights")
+print("="*60)
+
+# Filter 1: High Value Cases
+high_value = df_clients[df_clients['Fee_Amount']> 10000]
+print(f"\n✅ High-Value-Cases (>₹ 10,000): {len(high_value)}")
+print(high_value[['Name','Case_Type','Fee_Amount']].head())
+
+
 
