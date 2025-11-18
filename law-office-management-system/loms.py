@@ -32,13 +32,8 @@ df_clients = pd.DataFrame(clients_data)
 
 
 # Calculate additional columns
-df_clients['Days_Since_Registration'] = {
-(pd.Timestamp.now().normalize () -
-df_clients['Registration_Date'].dt.days)}
-df_clients['Priority'] = 
-
-df_clients['Days_Since_Registration'].apply
-(lambda x: 'High' if x >30 else 'Medium' if x>15 else 'Low')
+df_clients['Days_Since_Registration'] = (pd.Timestamp.now().normalize() - df_clients['Registration_Date']).dt.days
+df_clients['Priority'] = df_clients['Days_Since_Registration'].apply(lambda x: 'High' if x >30 else 'Medium' if x>15 else 'Low')
   # ============================================
 # SECTION 1: DATA INSPECTION (head, tail, info, shape)
 # ============================================
@@ -52,9 +47,5 @@ print(df_clients.tail(3))
 print("\n \u2705 DataFrame info.")
 print(df_clients.info())
 
-print(f"\n \u2705 Total Record:
-{df_clients.shape[0] rows ,
-{df_clients.shape[1] columns")
-
-
+print(f"\n✅ Total Records: {df_clients.shape[0]} rows, {df_clients.shape[1]} columns")
 
