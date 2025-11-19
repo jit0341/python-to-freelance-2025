@@ -81,5 +81,96 @@ high_value = df_clients[df_clients['Fee_Amount']> 10000]
 print(f"\n✅ High-Value-Cases (>₹ 10,000): {len(high_value)}")
 print(high_value[['Name','Case_Type','Fee_Amount']].head())
 
+#  Filter 2: Viable cases only
+viable_cases = df_clients[df_clients['Status'] == 'Viable']
+print(f"\nViable Cases: {len(viable_cases)}")
+print(viable_cases[['Name','Area','Status']].head())
+
+#  Filter 3: Pending payments
+pending_payment = df_clients[df_clients['Payment_Status'] == 'Pending']
+print(f"\nPending Payments: {len(pending_payment)}")
+print(f" Total Pending Amount: ₹{pending_payment['Fee_Amount'].sum():,}")
+
+
+# ============================================
+# SECTION 5: GROUPBY ANALYSIS
+# ============================================
+print("\n\n 📊SECTION 5: Category-wise Analysis")
+print("="*60)
+print("\n✅ Cases by Area")
+print(df_clients.groupby('Area')['Client_ID'].count())
+print("\n✅ Average Fee by Case Type")
+print(df_clients.groupby('Case_Type')['Fee_Amount'].mean().round(2))
+
+print("\n ✅ Status Distribution.")
+print(df_clients['Status'].value_counts())
+
+print("\n✅ Payment Status Summary.")
+print(df_clients.groupby('Payment_Status')['Fee_Amount'].sum())
+
+# ============================================
+# SECTION 6: ADVANCED INSIGHTS
+# ============================================
+print("\n\n🎯 SECTION 6: BUSINESS INSIGHTS")
+print("="*60)
+
+# Paid vs Pending
+paid = df_clients[df_clients['Payment_Status'] == 'Paid']
+print(f"\n✅ Total Paid: ₹{paid['Fee_Amount'].sum():,}")
+print(f"✅ Total Pending: ₹{pending_payment['Fee_Amount'].sum():,}")
+print(f"✅ Collection Rate: {len(paid)/len(df_clients)*100:.1f}%")
+
+# Most Profitable Area
+print("\n✅ Revenue by Area:")
+area_revenue = df_clients.groupby('Area')['Fee_Amount'].sum().sort_values(ascending = False)
+print(area_revenue)
+
+# Urgent Cases
+urgent = df_clients[df_clients['Priority'] =='High']
+print(f"✅ High Priority Cases: {len(urgent)}")
+print(urgent[['Name','Days_Since_Registration','Status']].head())
+
+#============================================
+# SECTION 7: MONTHLY REPORT (date_range usage)
+# ============================================
+
+print("\n\n📅 SECTION 7: MONTHLY ACTIVITY")
+print("="*60)
+
+df_clients['Month'] = df_clients['Registration_Date'].dt.strftime('%B')
+monthly = df_clients.groupby('Month').agg({'Client_ID': 'count','Fee_Amount': 'sum'}).rename(columns={'Client_ID': 'New_clients','Fee_Amount': 'Total_Revenue'})
+
+print(monthly)
+
+
+# ============================================
+# FINAL SUMMARY
+# ============================================
+print("\n\n" + "="*60)
+print(" 📈 Exexutive Summary")
+print("="*60)
+
+total_clients = len(df_clients)
+viable = len(df_clients[df_clients['Status'] == 'Viable'])
+has_lawyer = len(df_clients[df_clients['Status'] == 'Has Lawyer'])
+
+revenue = df_clients[df_clients['Payment_Status'] == 'Paid']['Fee_Amount'].sum()
+
+print(f"""
+Total Clients: {total_clients}
+Viable Cases: {viable} ({viable/total_clients*100:.1f}%)
+Already Has Lawyer: {has_lawyer} ({has_lawyer/total_clients*100:.1f}%)
+Total Revenue: ₹{revenue:,}
+Expected Revenue: ₹{df_clients['Fee_Amount'].sum():,}
+Collection Rate: {len(paid)/total_clients*100:.1f}%
+
+🎯 Recommendation: Focus on {len(pending_payment)} pending payments worth ₹{pending_payment['Fee_Amount'].sum():,}
+""")
+
+print("="*60)
+print(" ✅ ALL PANDAS CONCEPTS SUCCESSFULLY DEMONSTRATED!")
+print("="*60)
+
+
 
 
