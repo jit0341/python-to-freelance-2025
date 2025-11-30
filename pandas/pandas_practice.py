@@ -45,3 +45,22 @@ print(f"\nMinimum: {minimum}")
 total = df['Sales_Amount'].count()
 print(f"\nTotal : {total}")
 
+# 6. Group Data: df.groupby('col')
+employee_performance = df.groupby('Employee')['Sales_Amount'].mean()
+print("\n6. Grouping(Average Sales by Employee).")
+print(employee_performance)
+
+# Sort by 'Sales_Amount' in descending order
+df_sorted = df.sort_values('Sales_Amount', ascending = False)
+print("\n7(1). Sorting(By Sales Amount in descending).")
+print(df_sorted)
+
+# Sort by 'Sales_Amount' in Ascending order
+df_sorted = df.sort_values('Sales_Amount', ascending=True)
+
+print("\n7(2). Sorting (By Sales_Amount, Ascending):")
+print(df_sorted)
+
+# Add a 'Bonus_Eligible' column: True if
+Sales_Amount > 1400 
+
