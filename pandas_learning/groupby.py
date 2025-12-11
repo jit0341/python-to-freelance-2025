@@ -44,4 +44,42 @@ print("\n-----2.2: Max Experience by Department----")
 max_exp = employee_df.groupby('Department')['Experience'].max()
 print(max_exp)
 
+# Grouping by Multiple Columns
+# Test Data: Transactiom Data
+txn_df = pd.DataFrame({
+    'Store': ['A','B','A','C','B','C'],
+    'Month': ['Jan','Jan','Feb','Feb','Jan','Mar'],
+    'Amount': [200,350,400,150,500,700]
+    })
+print("\n-----Original Transaction Data----")
+print(txn_df)
+
+# Example 3.1: Total Amount by Store AND  month
+print("\n-----Total Amount by Store and Month-----")
+monthly_sales = txn_df.groupby(['Store','Month'])['Amount'].sum()
+print(monthly_sales)
+
+# Example 3.2: Reset DataFrame after grouping
+# reset_index
+print("\n-----3.2:Reseting the index----")
+df_report = txn_df.groupby(['Store','Month'])['Amount'].sum().reset_index()
+print(df_report)
+
+# Use Agg Function
+# Sum, mean, max 
+# Using the Sales Data(sales_df)
+print("\n---3.3: Multiple Aggregate on Sales Data-----")
+# Revenue column par Sum,mean,count teeno ko ek sath lagu karna
+multi_agg = sales_df.groupby('Region').agg(
+Total_revenue = ('Revenue','sum'),
+Average_Units = ('Units','mean'),
+Total_transaction = ('Revenue','count')
+)
+
+print(multi_agg)
+
+
+
+
+
 
