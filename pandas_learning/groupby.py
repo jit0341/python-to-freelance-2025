@@ -78,8 +78,31 @@ Total_transaction = ('Revenue','count')
 
 print(multi_agg)
 
+print("\n-----+Practice 2------------------------------------------------------")
+import pandas as pd
+
+sales_df = pd.DataFrame({
+    'Region': ['South','North','East','West','North','South','East'],
+    'Product': ['Oil','Rice','Wheat','Pulsese','Rice','Oil','Wheat'],
+    'Revenue': [100000,2000000,3000000,1500000,1800000,800000,2500000],
+    'Quantity_in_kilo': [1000,4000,5000,7000,9000,4000,10000]
+    })
+print("\n---Show all Data------")
+print(sales_df)
+print("\n------Total Revenue by Region-------")
+total_rev = sales_df.groupby('Region')['Revenue'].sum()
+print(total_rev)
+
+print("\n---Total Revenue by Product-----------")
+total_revP = sales_df.groupby('Product')['Revenue'].sum()
+print(total_revP)
 
 
+print("\n----1.2: Count of Products by Region---")
+count_by_region = sales_df.groupby('Region')['Product'].count()
+print(count_by_region)
 
-
+print("\n-----Count of Product by Quantity-------")
+count_of_product = sales_df.groupby('Quantity_in_kilo')['Product'].count()
+print(count_of_product)
 
