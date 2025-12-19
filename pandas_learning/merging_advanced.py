@@ -168,7 +168,9 @@ result = pd.merge(students,marks,on = 'roll', how = 'left')
 print("\n--Merged data")
 print(result)
 # Fill missing marks with 0
-result1 = result['marks'].fillna(0,inplace = True)
+result['marks'].fillna(0,inplace = True)
 print("\nAfter filling")
-print(result1)
+print(result)
+
+
 
